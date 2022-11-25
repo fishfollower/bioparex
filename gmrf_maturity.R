@@ -58,9 +58,13 @@ sdr<-sdreport(obj, opt$par, opt$he)
 pl<-as.list(sdr,"Est")
 plsd<-as.list(sdr,"Std")
 
-matplot(plogis(pl$P), type="l")
-matplot(plogis(pl$P-2*plsd$P), type="l", add=T)
-matplot(plogis(pl$P+2*plsd$P), type="l", add=T)
-matplot((tmb_data$Y), add=TRUE)
+matplot(seq(as.numeric(rownames(tmb_data$Y)[1]), len = nrow(pl$P)),
+        plogis(pl$P), type="l", ylab = "Proportion mature", xlab = "Year")
+matplot(seq(as.numeric(rownames(tmb_data$Y)[1]), len = nrow(pl$P)),
+        plogis(pl$P-2*plsd$P), type="l", add=T)
+matplot(seq(as.numeric(rownames(tmb_data$Y)[1]), len = nrow(pl$P)),
+        plogis(pl$P+2*plsd$P), type="l", add=T)
+matplot(seq(as.numeric(rownames(tmb_data$Y)[1]), len = nrow(tmb_data$Y)),
+(tmb_data$Y), add=TRUE)
 
 opt$par
